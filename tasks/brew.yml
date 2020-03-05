@@ -1,7 +1,10 @@
 ---
 - name: install brew package
-  become: '{{ kubernetes_helm_privilege_escalate | default(False) }}'
-  become_user: root
   homebrew:
     name: kubernetes-helm
     state: present
+
+- name: brew link package
+  homebrew:
+    name: kubernetes-helm
+    state: linked
