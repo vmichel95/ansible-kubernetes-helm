@@ -9,7 +9,7 @@
 - when: not kubernetes_helm_binary_dir.stat.exists
   block:
     - name: download...
-      become: yes
+      become: '{{ kubernetes_helm_privilege_escalate | default(False) }}'
       become_user: root
       get_url:
         url: '{{ kubernetes_helm_url }}'
@@ -18,7 +18,7 @@
         mode: 0644
 
     - name: make install dir
-      become: yes
+      become: '{{ kubernetes_helm_privilege_escalate | default(False) }}'
       become_user: root
       file:
         path: '{{ kubernetes_helm_install_dir }}'
@@ -26,7 +26,7 @@
         mode: 0755
 
     - name: unarchive
-      become: yes
+      become: '{{ kubernetes_helm_privilege_escalate | default(False) }}'
       become_user: root
       unarchive:
         copy: no
@@ -35,14 +35,14 @@
         creates: '{{ kubernetes_helm_install_dir }}/{{ kubernetes_helm_platform }}'
   always:
     - name: cleanup...
-      become: yes
+      become: '{{ kubernetes_helm_privilege_escalate | default(False) }}'
       become_user: root
       file:
         path: /tmp/{{ kubernetes_helm_archive }}
         state: absent
 
 - name: link
-  become: yes
+  become: '{{ kubernetes_helm_privilege_escalate | default(False) }}'
   become_user: root
   with_items:
     - helm
