@@ -3,13 +3,16 @@
   homebrew:
     name: kubernetes-helm
     state: present
+  # relink: brew unlink helm && brew link helm
 - name: (re)link brew package
   block: 
-  - homebrew:
+  - name: brew unlink package
+    homebrew:
       name: kubernetes-helm
       state: unlinked
-
-  - homebrew:
+      
+  - name: brew link package
+    homebrew:
       name: kubernetes-helm
       state: linked
       options: overwrite
