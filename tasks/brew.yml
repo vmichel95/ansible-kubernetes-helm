@@ -3,10 +3,13 @@
   homebrew:
     name: kubernetes-helm
     state: present
-    options: force-bottle
+- name: (re)link brew package
+  block: 
+  - homebrew:
+      name: kubernetes-helm
+      state: unlinked
 
-- name: brew link package
-  homebrew:
-    name: kubernetes-helm
-    state: linked
-    options: overwrite
+  - homebrew:
+      name: kubernetes-helm
+      state: linked
+      options: overwrite
