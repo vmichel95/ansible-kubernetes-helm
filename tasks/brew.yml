@@ -8,4 +8,4 @@
   homebrew:
     name: kubernetes-helm
     state: linked
-    options: overwrite
+    options: overwrite, force
