@@ -1,8 +1,8 @@
 ---
-# - name: install brew package
-#   homebrew:
-#     name: kubernetes-helm
-#     state: present
+- name: install brew package
+  homebrew:
+    name: kubernetes-helm
+    state: present
 
 - name: brew link package
   homebrew:
