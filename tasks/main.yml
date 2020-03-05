@@ -10,4 +10,13 @@
       paths:
         - '{{ role_path }}/vars'
 
+- name: resolve installer specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ kubernetes_helm_installer | default("tgz") }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+
 - include_tasks: '{{ kubernetes_helm_installer | default("tgz") }}.yml'
