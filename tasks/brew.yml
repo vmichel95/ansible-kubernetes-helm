@@ -3,7 +3,7 @@
   homebrew:
     name: kubernetes-helm
     state: present
-    options: force
+    options: force-bottle
 
 - name: brew link package
   homebrew:
